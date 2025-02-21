@@ -1,0 +1,23 @@
+# Android Studio-specific
+*.iml
+.idea/
+.gradle/
+local.properties
+
+# Flutter/Dart related
+.dart_tool/
+.packages
+build/
+pubspec.lock
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# User-generated files
+*.flutter-plugins
+*.flutter-plugins-dependencies
+*.metadata
