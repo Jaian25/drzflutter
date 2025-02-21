@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "672139682448",
+    "project_id": "drzed-50e5b",
+    "storage_bucket": "drzed-50e5b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:672139682448:android:39217e8c888a3570676e15",
+        "android_client_info": {
+          "package_name": "com.drz.flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAndwJqhPFWdrpy6s9U_IPKwuGjtUEqKg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
