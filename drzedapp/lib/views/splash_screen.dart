@@ -13,6 +13,14 @@ class SplashScreen extends StatelessWidget{
           children: [
             Expanded(child: Lottie.asset('assets/animations/Animation - 1740229235392.json')),
             Expanded(child: Lottie.asset('assets/animations/Animation - 1740229199714.json')),
+            const Expanded(flex:1, child: Text(
+                "Loading...",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 227, 56, 44),
+                  fontSize: 20,
+                ),
+                )
+              ),
           ],
         ),
       ), 
