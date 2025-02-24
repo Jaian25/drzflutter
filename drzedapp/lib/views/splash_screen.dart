@@ -1,4 +1,4 @@
-import 'package:drzedapp/views/home_page.dart';
+import 'package:drzedapp/views/home/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:lottie/lottie.dart';
@@ -24,8 +24,8 @@ class SplashScreen extends StatelessWidget{
           ],
         ),
       ), 
-      nextScreen: const MyHomePage(title: "Dr Zed"),
-      duration: 5000,
+      nextScreen: const HomePage(title: "Dr Zed",),
+      duration: 100,
       backgroundColor: Colors.white70,
       splashIconSize: 1000,
       );
