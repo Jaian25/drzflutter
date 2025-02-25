@@ -13,9 +13,13 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
   @override
   Future<void> addQuestion(Question question) async {
     try {
+      debugPrint("Question add $question.id");
       DatabaseReference questionRef = _database.ref('questions').child(question.id);
+      debugPrint("Got reference");
       await questionRef.set(question.toMap());
-    } catch (e) {
+      debugPrint("Question add done");
+    } 
+    catch (e) {
       throw Exception("Error adding question: $e");
     }
   }
@@ -43,17 +47,17 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
   }
 
   // Get all Questions
-  @override
+ @override
   Future<List<Question>> getQuestions() async {
     try {
       DatabaseReference questionsRef = _database.ref('questions');
       DataSnapshot snapshot = await questionsRef.get();
 
-      if (snapshot.exists) {
+      if (snapshot.exists && snapshot.value is Map<dynamic, dynamic>) {
         Map<dynamic, dynamic> questionsData = snapshot.value as Map<dynamic, dynamic>;
 
         return questionsData.entries.map((entry) {
-          var data = entry.value as Map<String, dynamic>;
+          var data = Map<String, dynamic>.from(entry.value as Map);
           switch (data['type']) {
             case 'text':
               return TextQuestion(id: entry.key, text: data['text']);
@@ -61,22 +65,24 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
               return SingleChoiceQuestion(
                 id: entry.key,
                 text: data['text'],
-                options: List<String>.from(data['options']),
+                options: List<String>.from(data['options'] ?? []),
               );
             case 'multiple_choice':
               return MultipleChoiceQuestion(
                 id: entry.key,
                 text: data['text'],
-                options: List<String>.from(data['options']),
+                options: List<String>.from(data['options'] ?? []),
               );
             default:
-              throw Exception('Unknown question type');
+              throw Exception('Unknown question type: ${data['type']}');
           }
         }).toList();
       } else {
+        debugPrint("[LOG] No questions found in database.");
         return [];
       }
     } catch (e) {
+      debugPrint("[LOG] Error fetching questions: $e");
       throw Exception("Error fetching questions: $e");
     }
   }
@@ -88,8 +94,8 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
       DatabaseReference questionRef = _database.ref('questions').child(questionId);
       DataSnapshot snapshot = await questionRef.get();
 
-      if (snapshot.exists) {
-        var data = snapshot.value as Map<String, dynamic>;
+      if (snapshot.exists && snapshot.value is Map) {
+        var data = Map<String, dynamic>.from(snapshot.value as Map);
         switch (data['type']) {
           case 'text':
             return TextQuestion(id: questionId, text: data['text']);
@@ -97,23 +103,27 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
             return SingleChoiceQuestion(
               id: questionId,
               text: data['text'],
-              options: List<String>.from(data['options']),
+              options: List<String>.from(data['options'] ?? []),
             );
           case 'multiple_choice':
             return MultipleChoiceQuestion(
               id: questionId,
               text: data['text'],
-              options: List<String>.from(data['options']),
+              options: List<String>.from(data['options'] ?? []),
             );
           default:
-            throw Exception('Unknown question type');
+            throw Exception('Unknown question type: ${data['type']}');
         }
+      } else {
+        debugPrint("[LOG] No question found for ID: $questionId");
+        return null;
       }
-      return null;
     } catch (e) {
+      debugPrint("[LOG] Error fetching question by ID: $e");
       throw Exception("Error fetching question by ID: $e");
     }
   }
+
 
   // Add Test
   @override
