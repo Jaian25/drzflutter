@@ -7,7 +7,6 @@ abstract class Question {
   Map<String, dynamic> toMap();
 }
 
-// ✅ Text-Based Questions
 class TextQuestion extends Question {
   TextQuestion({required super.id, required super.text});
 
@@ -17,7 +16,6 @@ class TextQuestion extends Question {
   }
 }
 
-// ✅ Single Choice Questions (Yes/No, One Option)
 class SingleChoiceQuestion extends Question {
   final List<String> options;
 
@@ -33,7 +31,6 @@ class SingleChoiceQuestion extends Question {
   }
 }
 
-// ✅ Multiple Choice Questions
 class MultipleChoiceQuestion extends Question {
   final List<String> options;
 
