@@ -5,14 +5,14 @@ class Test {
   String iconUri;
   String title;
   String description;
-  List<int> questionaries;
+  List<String> questionariesId;
 
   Test({
     required this.id,
     required this.iconUri,
     required this.title,
     required this.description,
-    required this.questionaries,
+    required this.questionariesId,
   });
 
   // Factory method to create an instance from Firebase Realtime Database snapshot
@@ -23,7 +23,7 @@ class Test {
       iconUri: data['icon_uri'] ?? '',
       title: data['title'] ?? '',
       description: data['description'] ?? '',
-      questionaries: List<int>.from(data['questionaries'] ?? []),
+      questionariesId: List<String>.from(data['questionariesId'] ?? []),
     );
   }
 
@@ -33,7 +33,19 @@ class Test {
       'icon_uri': iconUri,
       'title': title,
       'description': description,
-      'questionaries': questionaries,
+      'questionariesId': questionariesId,
     };
+  }
+
+  // Add a question ID to the Test
+  void addQuestion(String questionId) {
+    if (!questionariesId.contains(questionId)) {
+      questionariesId.add(questionId);
+    }
+  }
+
+  // Remove a question ID from the Test
+  void removeQuestion(String questionId) {
+    questionariesId.remove(questionId);
   }
 }
