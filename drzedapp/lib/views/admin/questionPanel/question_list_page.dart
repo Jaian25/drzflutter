@@ -1,8 +1,8 @@
 import 'package:drzedapp/data/client/firebase_db_client.dart';
 import 'package:flutter/material.dart';
-import '../../data/repository/question_repository.dart';
-import '../../domain/usecases/question_use_case.dart';
-import '../../models/question.dart';
+import '../../../data/repository/question_repository.dart';
+import '../../../domain/usecases/question_use_case.dart';
+import '../../../models/question.dart';
 import 'add_question_page.dart';
 import 'question_card.dart';
 
@@ -32,7 +32,7 @@ class _QuestionListPageState extends State<QuestionListPage> {
       setState(() {
         _isLoading = true;
       });
-      
+
       List<Question> fetchedQuestions = await _questionUseCase.getQuestions();
       setState(() {
         _questions = fetchedQuestions;

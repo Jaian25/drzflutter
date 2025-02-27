@@ -13,7 +13,7 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
   @override
   Future<void> addQuestion(Question question) async {
     try {
-      debugPrint("Question add $question.id");
+      debugPrint("Question add ${question.id}");
       DatabaseReference questionRef = _database.ref('questions').child(question.id);
       debugPrint("Got reference");
       await questionRef.set(question.toMap());
@@ -47,7 +47,7 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
   }
 
   // Get all Questions
- @override
+  @override
   Future<List<Question>> getQuestions() async {
     try {
       DatabaseReference questionsRef = _database.ref('questions');
@@ -124,7 +124,6 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
     }
   }
 
-
   // Add Test
   @override
   Future<void> addTest(Test test) async {
@@ -166,7 +165,9 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
       DataSnapshot snapshot = await testRef.get();
 
       if (snapshot.exists) {
-        return Test.fromRealtimeDatabase(snapshot);
+        // Ensure Test.fromMap is called properly
+        var data = Map<String, dynamic>.from(snapshot.value as Map);
+        return Test.fromMap(data, testId); // Use fromMap with data and testId
       }
       return null;
     } catch (e) {
@@ -182,7 +183,8 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
       DataSnapshot snapshot = await testRef.get();
 
       if (snapshot.exists) {
-        Test test = Test.fromRealtimeDatabase(snapshot);
+        var data = Map<String, dynamic>.from(snapshot.value as Map);
+        Test test = Test.fromMap(data, testId); // Properly convert snapshot to Test
         test.addQuestion(questionId); // Modify the test by adding the question ID
         await testRef.update(test.toMap()); // Update the test in the database
       } else {
@@ -201,7 +203,8 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
       DataSnapshot snapshot = await testRef.get();
 
       if (snapshot.exists) {
-        Test test = Test.fromRealtimeDatabase(snapshot);
+        var data = Map<String, dynamic>.from(snapshot.value as Map);
+        Test test = Test.fromMap(data, testId); // Properly convert snapshot to Test
         test.removeQuestion(questionId); // Modify the test by removing the question ID
         await testRef.update(test.toMap()); // Update the test in the database
       } else {
@@ -209,6 +212,30 @@ class FirebaseDbClient implements QuestionRepository, TestRepository {
       }
     } catch (e) {
       throw Exception("Error removing question from test: $e");
+    }
+  }
+
+  // Get all Tests
+  @override
+  Future<List<Test>> getTests() async {
+    try {
+      DatabaseReference testsRef = _database.ref('tests');
+      DataSnapshot snapshot = await testsRef.get();
+
+      if (snapshot.exists && snapshot.value is Map<dynamic, dynamic>) {
+        Map<dynamic, dynamic> testsData = snapshot.value as Map<dynamic, dynamic>;
+
+        return testsData.entries.map((entry) {
+          var data = Map<String, dynamic>.from(entry.value as Map);
+          return Test.fromMap(data, entry.key); // Properly create Test object
+        }).toList();
+      } else {
+        debugPrint("[LOG] No tests found in database.");
+        return [];
+      }
+    } catch (e) {
+      debugPrint("[LOG] Error fetching tests: $e");
+      throw Exception("Error fetching tests: $e");
     }
   }
 }

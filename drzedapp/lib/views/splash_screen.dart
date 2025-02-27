@@ -1,4 +1,5 @@
 import 'package:drzedapp/views/admin/questionPanel/question_list_page.dart';
+import 'package:drzedapp/views/admin/testPanel/test_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:lottie/lottie.dart';
@@ -25,7 +26,7 @@ class SplashScreen extends StatelessWidget{
         ),
       ), 
       //nextScreen: const HomePage(title: "Dr Zed",),
-      nextScreen: QuestionListPage(),
+      nextScreen: TestListPage(),
       duration: 100,
       backgroundColor: Colors.white70,
       splashIconSize: 100,

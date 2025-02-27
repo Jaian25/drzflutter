@@ -16,10 +16,9 @@ class Test {
   });
 
   // Factory method to create an instance from Firebase Realtime Database snapshot
-  factory Test.fromRealtimeDatabase(DataSnapshot snapshot) {
-    Map<String, dynamic> data = Map<String, dynamic>.from(snapshot.value as Map);
+  factory Test.fromMap(Map<String, dynamic> data, String id) {
     return Test(
-      id: snapshot.key ?? '',
+      id: id,
       iconUri: data['icon_uri'] ?? '',
       title: data['title'] ?? '',
       description: data['description'] ?? '',

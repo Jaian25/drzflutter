@@ -5,6 +5,7 @@ abstract class TestRepository {
   Future<void> updateTest(Test test);
   Future<void> deleteTest(String testId);
   Future<Test?> getTestById(String testId);
+  Future<List<Test>> getTests();
   Future<void> addQuestionToTest(String testId, String questionId);
   Future<void> removeQuestionFromTest(String testId, String questionId);
 }

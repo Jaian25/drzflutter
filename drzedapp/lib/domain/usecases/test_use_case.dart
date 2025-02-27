@@ -22,6 +22,10 @@ class TestUseCase {
     return await _testRepository.getTestById(testId);
   }
 
+  Future<List<Test>> getTests() async {
+    return await _testRepository.getTests();
+  }
+
   Future<void> addQuestionToTest(String testId, String questionId) async {
     await _testRepository.addQuestionToTest(testId, questionId);
   }

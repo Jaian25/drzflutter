@@ -1,9 +1,6 @@
-import 'package:drzedapp/data/client/firebase_db_client.dart';
-import 'package:drzedapp/data/repository/question_repository.dart';
-import 'package:drzedapp/views/question/modify_question_page.dart';
+import 'package:drzedapp/views/admin/questionPanel/modify_question_page.dart';
 import 'package:flutter/material.dart';
-import '../../models/question.dart';
-import '../../domain/usecases/question_use_case.dart';
+import '../../../models/question.dart';
 
 class QuestionCard extends StatelessWidget {
   final Question question;

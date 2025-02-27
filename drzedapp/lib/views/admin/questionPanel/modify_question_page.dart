@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../models/question.dart';
-import '../../domain/usecases/question_use_case.dart';
+import '../../../models/question.dart';
+import '../../../domain/usecases/question_use_case.dart';
 
 class ModifyQuestionPage extends StatefulWidget {
   final Question question;
