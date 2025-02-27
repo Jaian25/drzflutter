@@ -1,4 +1,4 @@
-import 'package:drzedapp/views/question/question_list_page.dart';
+import 'package:drzedapp/views/admin/questionPanel/question_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:lottie/lottie.dart';
