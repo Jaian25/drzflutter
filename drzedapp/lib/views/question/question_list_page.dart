@@ -29,6 +29,10 @@ class _QuestionListPageState extends State<QuestionListPage> {
 
   void _fetchQuestions() async {
     try {
+      setState(() {
+        _isLoading = true;
+      });
+      
       List<Question> fetchedQuestions = await _questionUseCase.getQuestions();
       setState(() {
         _questions = fetchedQuestions;
@@ -51,7 +55,7 @@ class _QuestionListPageState extends State<QuestionListPage> {
               : ListView.builder(
                   itemCount: _questions.length,
                   itemBuilder: (context, index) {
-                    return QuestionCard(question: _questions.elementAt(index));
+                    return QuestionCard(question: _questions.elementAt(index), questionUseCase: _questionUseCase, onQuestionUpdated: () { _fetchQuestions(); }, onQuestionDeleted: () { _fetchQuestions(); },);
                   },
                 ),
       floatingActionButton: FloatingActionButton(
