@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import './favourites_page.dart';
-import './tests_page.dart';
-import './history_page.dart';
+import 'favourites_page.dart';
+import 'tests_page.dart';
+import 'history_page.dart';
 
 class HomeScreen extends StatefulWidget {
   @override

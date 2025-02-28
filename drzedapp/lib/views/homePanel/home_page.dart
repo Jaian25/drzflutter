@@ -1,4 +1,4 @@
-import 'package:drzedapp/views/home_panel/home_card.dart';
+import 'package:drzedapp/views/homePanel/home_card.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
