@@ -32,7 +32,7 @@ class SplashScreen extends StatelessWidget {
         future: FirebaseAuth.instance.currentUser != null ? Future.value(FirebaseAuth.instance.currentUser) : Future.delayed(Duration(seconds: 1), () => null),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Container(color: Colors.white70); // Show a blank screen while waiting
+            return Container(color: Colors.red); // Show a blank screen while waiting
           }
           if (snapshot.hasData) {
             // If the user is logged in, navigate to the HomeScreen
@@ -43,7 +43,7 @@ class SplashScreen extends StatelessWidget {
           }
         },
       ),
-      duration: 5000,
+      duration: 100,
       backgroundColor: Colors.white70,
       splashIconSize: 350,
     );

@@ -1,6 +1,7 @@
 import 'package:drzedapp/views/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +16,7 @@ void main() async {
         databaseURL: "https://drzed-50e5b-default-rtdb.asia-southeast1.firebasedatabase.app"
       )
   );
+  //await FirebaseAuth.instance.useAuthEmulator('localhost', 9099);
   print("firebase intiliaze app");
   runApp(const MyApp());
 }

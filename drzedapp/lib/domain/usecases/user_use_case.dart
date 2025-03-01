@@ -6,46 +6,43 @@ class UserUseCase {
 
   UserUseCase(this._userRepository);
 
-  Future<void> addUser(User user) async {
-    await _userRepository.addUser(user);
+  Future<Map<String, dynamic>> addUser(User user) async {
+    return await _userRepository.addUser(user);
   }
 
-  Future<void> updateUser(User user) async {
-    await _userRepository.updateUser(user);
+  Future<Map<String, String>> updateUser(User user) async {
+    return await _userRepository.updateUser(user);
   }
 
-  Future<void> deleteUser(String userId) async {
-    await _userRepository.deleteUser(userId);
+  Future<Map<String, String>> deleteUser(String userId) async {
+    return await _userRepository.deleteUser(userId);
   }
 
-  Future<User?> getUserById(String userId) async {
+  Future<Map<String, dynamic>> getUserById(String userId) async {
     return await _userRepository.getUserById(userId);
   }
 
-  Future<List<User>> getUsers() async {
+  Future<Map<String, dynamic>> getUsers() async {
     return await _userRepository.getUsers();
   }
 
-  Future<void> updateUserStatus(String userId, bool isActive) async {
-    await _userRepository.updateUserStatus(userId, isActive);
+  Future<Map<String, String>> updateUserStatus(String userId, bool isActive) async {
+    return await _userRepository.updateUserStatus(userId, isActive);
   }
 
-  Future<void> updateUserPrivilege(String userId, Privilege privilege) async {
-    await _userRepository.updateUserPrivilege(userId, privilege);
+  Future<Map<String, String>> updateUserPrivilege(String userId, Privilege privilege) async {
+    return await _userRepository.updateUserPrivilege(userId, privilege);
   }
 
-  // Get a user's favorite test IDs
-  Future<List<String>> getUserFavourites(String userId) async {
+  Future<Map<String, dynamic>> getUserFavourites(String userId) async {
     return await _userRepository.getUserFavourites(userId);
   }
 
-  // Add a test to user's favorites
-  Future<void> addTestToFavourites(String userId, String testId) async {
-    await _userRepository.addTestToFavourites(userId, testId);
+  Future<Map<String, String>> addTestToFavourites(String userId, String testId) async {
+    return await _userRepository.addTestToFavourites(userId, testId);
   }
 
-  // Remove a test from user's favorites
-  Future<void> removeTestFromFavourites(String userId, String testId) async {
-    await _userRepository.removeTestFromFavourites(userId, testId);
+  Future<Map<String, String>> removeTestFromFavourites(String userId, String testId) async {
+    return await _userRepository.removeTestFromFavourites(userId, testId);
   }
 }
